@@ -1,0 +1,22 @@
+{
+  "name": "rest_api",
+  "version": "1.0.0",
+  "description": "a restful api with nodejs and mongo",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Antonin Arquey",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.5",
+    "pug": "^2.0.0-beta.12",
+    "serve-favicon": "^2.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}

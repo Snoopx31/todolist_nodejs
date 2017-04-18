@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+    ul
+        each task in tasks
+            li
+                a(href="/task/" + task.id)= task.name
+                case task.status
+                    when 'pending'
+                        p pending
+                    when 'ongoing'
+                        p ongoing
+                    when 'completed'
+                        p completed
