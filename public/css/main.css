@@ -1,3 +1,22 @@
 #container {
     padding-top: 80px;
 }
+
+ul {
+    list-style-type: none;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.task-name{
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.tasks{
+    text-align: center;
+}
+
+.list-task-complete p{
+    text-decoration: line-through;
+}

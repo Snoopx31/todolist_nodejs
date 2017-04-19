@@ -1,14 +1,30 @@
 extends ../layout
 
 block content
-    ul
-        each task in tasks
-            li
-                a(href="/task/" + task.id)= task.name
-                case task.status
-                    when 'pending'
-                        p pending
-                    when 'ongoing'
-                        p ongoing
-                    when 'completed'
-                        p completed
+    div.row
+        div.col-lg-6.col-lg-offset-3.col-md-8.col-md-offset-2.tasks
+            form.form-inline(method="post" action="/tasks")
+                div.form-group
+                    label(for="name") Task : 
+                    input(type="text" name="name" placeholder="Brush my cat")
+                button.btn.btn-success(type="submit") New Task
+            
+            div.col-md-6
+                h2 Todo
+                ul.list-task.list-group
+                    each task in pending
+                        li.list-group-item
+                            p
+                                span.task-name(contenteditable="true" data-task=task.id)=task.name 
+                            button.complete-task.btn.btn-primary.btn-xs(data-task=task.id) Completed
+                            button.delete-task.btn.btn-danger.btn-xs(data-task=task.id) Delete
+            div.col-md-6
+                h2 Completed
+                ul.list-task-complete.list-group
+                    each task in completed
+                        li.list-group-item
+                            p.task-name= task.name
+                            button.delete-task.btn.btn-danger.btn-xs(data-task=task.id) Delete
+        
+    
+        

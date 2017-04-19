@@ -14,13 +14,18 @@ html( lang="en" )
                     a.navbar-brand(href="/") REST API TODO
                 div#navbar
                     ul.nav.navbar-nav
-                        li.active
+                        li
                             a(href="/") Home
                         li
                             a(href="/tasks") TodoList
             
         div#container.container
+            if flash.success && flash.success.length !== 0
+                div.alert.alert-success= flash.success
+            if flash.error && flash.error.length !== 0
+                div.alert.alert-danger= flash.error
             block content
         
         script( src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" )
         script( src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous" )
+        script( src="js/main.js")

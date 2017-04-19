@@ -12,52 +12,53 @@ exports.index = (req, res) => {
             res.send(err);
         }
         else{
-            res.render('tasks/index', {tasks : tasks});
+            let completed = [], pending = [];
+            tasks.map((task) => {
+                if (task.status === 'pending'){
+                    pending.push(task);
+                }
+                else{
+                    completed.push(task);
+                }
+            });
+            res.render('tasks/index', {completed: completed, pending: pending});
         }
     });
 };
 
 exports.create = (req, res) => {
+    if(!req.body || !req.body.name){
+        req.flash('error', 'Un paramètre est manquant ...');
+        return res.redirect('/tasks');
+    }
     let new_task = new Task(req.body);
     new_task.save((err, task) => {
         if(err){
-            res.send(err);
+            req.flash('error', 'Une erreur s\'est produite ...');
         }
-        else{
-            res.json(task);
-        }
+        return res.redirect('/tasks');
     });
 };
 
-exports.show = (req, res) => {
-    Task.findById(req.params.id, (err, task) => {
-        if(err){
-            res.send(err);
-        }
-        else{
-            res.json(task);
-        }
-    });
-};
 
 exports.update = (req, res) => {
-    Task.findOneAndUpdate(req.params.id, req.body, {new: true}, (err, task) => {
+    Task.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, task) => {
         if(err){
             res.send(err);
         }
         else{
-            res.json(task);
+            res.json({message: "Task successfully updated !"});
         }
     });
 };
 
 exports.destroy = (req, res) => {
-    Task.findOneAndRemove(req.params.id, (err) => {
+    Task.findByIdAndRemove(req.params.id, (err, task) => {
         if(err){
             res.send(err);
         }
         else{
-            res.json({message: "task deleted"});
+            res.json({message: "Task successfully deleted !"});
         }
     });
 };

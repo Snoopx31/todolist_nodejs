@@ -9,7 +9,6 @@ module.exports = (router) => {
         .post(tasks.create);
 
     router.route('/task/:id')
-        .get(tasks.show)
         .put(tasks.update)
         .delete(tasks.destroy)
 
