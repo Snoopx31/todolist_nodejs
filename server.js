@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const csrf = require('csurf');
 const flash = require('express-flash');
+const passport = require('passport');
 
 const port = process.env.PORT || 5555;
 
@@ -17,9 +18,13 @@ let app = express();
 // # DATABASE
 
 require('./api/models/task.model');
+require('./api/models/user.model');
 mongoose.connect('mongodb://localhost/rest_api');
 
 // # CONF
+
+const passConf = require('./api/config/passport.js');
+passConf(passport);
 
 app.set('views', './api/views');
 app.set('view engine', 'pug');
@@ -30,8 +35,16 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
+
+
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(flash());
 //app.use(csrf());
+
 
 
 // Parse application/json
@@ -55,6 +68,10 @@ app.use((req, res, next) => {
       success: req.flash('success'),
       error: req.flash('error')
   };
+
+  if (req.user) {
+      res.locals.user = req.user;
+  }
   next();
 });
 
@@ -65,11 +82,7 @@ let router = express.Router();
 
 app.use('/', router);
 
-router.get('/', (req, res) => {
-    res.render('index');
-});
-
-routes(router);
+routes(router, passport);
 
 app.use((req, res) =>{
     res.status(404).render('error');

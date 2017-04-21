@@ -1,14 +1,14 @@
-extends layout
+extends ../layout
 
 block content
     div.col-md-4.col-md-offset-4
-        h2 Connexion
-        form(method="post" action="/login")
+        h2 Signup
+        form(method="post" action="/signup")
             div.form-group
                 label(for="email") Email
                 input.form-control(name="email" type="email" placeholder="Email")
             div.form-group
                 label(for="password") password
                 input.form-control(name="password" type="password" placeholder="Password")
-            button.btn.btn-primary(type="submit") Log In
-            a.btn.btn-defautl(href="/signup") Sign up
+            button.btn.btn-primary(type="submit") Create my account
+            a.btn.btn-defautl(href="/") Log In

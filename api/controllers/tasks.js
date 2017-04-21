@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const Task = mongoose.model('Task');
 
 exports.index = (req, res) => {
-    Task.find((err, tasks) => {
+    Task.find({owner: req.user.id}, (err, tasks) => {
         if(err){
             res.send(err);
         }
@@ -31,7 +31,9 @@ exports.create = (req, res) => {
         req.flash('error', 'Un paramètre est manquant ...');
         return res.redirect('/tasks');
     }
-    let new_task = new Task(req.body);
+    let new_task = new Task();
+    new_task.name = req.body.name;
+    new_task.owner = req.user.id;
     new_task.save((err, task) => {
         if(err){
             req.flash('error', 'Une erreur s\'est produite ...');

@@ -1,15 +1,21 @@
 {
-  "name": "todolist app",
+  "name": "todolist_app",
   "version": "1.0.0",
   "description": "a (very) simple todolist app whit expressjs and mongodb",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
   },
-  "keywords": ["todo", "list", "mongodb", "expressjs"],
+  "keywords": [
+    "todo",
+    "list",
+    "mongodb",
+    "expressjs"
+  ],
   "author": "Antonin Arquey",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",
     "csurf": "^1.9.0",
@@ -17,6 +23,8 @@
     "express-flash": "0.0.2",
     "express-session": "^1.15.2",
     "mongoose": "^4.9.5",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "pug": "^2.0.0-beta.12",
     "serve-favicon": "^2.4.2"
   },

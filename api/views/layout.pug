@@ -11,13 +11,21 @@ html( lang="en" )
         nav.navbar.navbar-inverse.navbar-fixed-top
             div.container
                 div.navbar-header
-                    a.navbar-brand(href="/") REST API TODO
+                    a.navbar-brand() TodoList NodeJS
                 div#navbar
                     ul.nav.navbar-nav
-                        li
-                            a(href="/") Home
-                        li
-                            a(href="/tasks") TodoList
+                        if !user
+                            li
+                                a(href="/") Log in
+                        
+                        if user 
+                            li
+                                a(href="/tasks") My TodoList
+                            li
+                                a=user.email
+                            li
+                                a(href="/logout") Log out
+                            
             
         div#container.container
             if flash.success && flash.success.length !== 0
